@@ -19,7 +19,7 @@ First, add the proper LCD settings to the config.txt file:
 Add to end of the config.txt file:
 
 ```
-# --- added by elecrow-pitft-setup  ---`
+# --- added by elecrow-pitft-setup  ---
 hdmi_force_hotplug=1
 max_usb_current=1
 hdmi_drive=1
@@ -37,6 +37,7 @@ Install the required software:
 ```
 sudo apt-get install python3-pip git fbi
 sudo pip3 install --upgrade setuptools
+```
 
 Install CircuitPython:
 
@@ -45,6 +46,7 @@ sudo pip3 install --upgrade adafruit-python-shell
 wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
 sudo python3 raspi-blinka.py
 sudo pip3 install adafruit-circuitpython-ads1x15
+```
 
 Install the ADS libraries from Git:
 
@@ -52,6 +54,7 @@ Install the ADS libraries from Git:
 git clone https://github.com/adafruit/Adafruit_Python_ADS1x15
 cd Adafruit_Python_ADS1x15
 sudo pip3 install --upgrade setuptools
+```
 
 Install Livestreamer:
 
