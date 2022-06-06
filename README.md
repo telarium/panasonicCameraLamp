@@ -58,6 +58,6 @@ sudo pip3 install --upgrade setuptools
 
 Install Livestreamer:
 
-`sudo pip install livestreamer'
+`sudo pip install livestreamer`
 
 
