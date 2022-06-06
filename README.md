@@ -18,35 +18,35 @@ First, add the proper LCD settings to the config.txt file:
 
 Add to end of the config.txt file:
 
-`# --- added by elecrow-pitft-setup  ---
-hdmi_force_hotplug=1
-max_usb_current=1
-hdmi_drive=1
-hdmi_group=2
-hdmi_mode=1
-hdmi_mode=87
-hdmi_cvt 800 480 60 6 0 0 0
-dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900
-display_rotate=0
-\# --- end elecrow-pitft-setup  ---`
+`# --- added by elecrow-pitft-setup  ---`
+`hdmi_force_hotplug=1`
+`max_usb_current=1`
+`hdmi_drive=1`
+`hdmi_group=2`
+`hdmi_mode=1`
+`hdmi_mode=87`
+`hdmi_cvt 800 480 60 6 0 0 0`
+`dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900
+`display_rotate=0`
+# --- end elecrow-pitft-setup  ---`
 
 Install the required software:
 
-`sudo apt-get install python3-pip git fbi
-sudo pip3 install --upgrade setuptools`
+`sudo apt-get install python3-pip git fbi`
+`sudo pip3 install --upgrade setuptools`
 
 Install CircuitPython:
 
 `sudo pip3 install --upgrade adafruit-python-shell
-wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
-sudo python3 raspi-blinka.py
-sudo pip3 install adafruit-circuitpython-ads1x15`
+`wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py`
+`sudo python3 raspi-blinka.py`
+`sudo pip3 install adafruit-circuitpython-ads1x15`
 
 Install the ADS libraries from Git:
 
-`git clone https://github.com/adafruit/Adafruit_Python_ADS1x15
-cd Adafruit_Python_ADS1x15
-sudo pip3 install --upgrade setuptools`
+`git clone https://github.com/adafruit/Adafruit_Python_ADS1x15`
+`cd Adafruit_Python_ADS1x15`
+`sudo pip3 install --upgrade setuptools`
 
 Install Livestreamer:
 
