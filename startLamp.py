@@ -15,8 +15,11 @@ VIDEO_STANDBY_IMAGE = "images/testPattern1.gif"
 # The list of videos to display when the lamp's input source is not set to "camera" via a physical switch.
 # Which video file or internet webcam stream to play is controlled by the lamp's contrast knob.
 videoStreamChannels = []
-videoStreamChannels.append("livestreamer http://ustream.tv/channel/live-iss-stream mobile_480p --yes-run-as-root --player omxplayer --fifo")
-videoStreamChannels.append("livestreamer http://ustream.tv/channel/iss-hdev-payload mobile_360p --yes-run-as-root --player omxplayer --fifo")
+#videoStreamChannels.append("livestreamer http://ustream.tv/channel/live-iss-stream mobile_480p --yes-run-as-root --player omxplayer --fifo")
+#videoStreamChannels.append("livestreamer http://ustream.tv/channel/iss-hdev-payload mobile_360p --yes-run-as-root --player omxplayer --fifo")
+videoStreamChannels.append("videos/glitch.mp4")
+videoStreamChannels.append("videos/atari.mp4")
+
 
 # The list of properties/effects to use for the lamp's camera when it is active via the physical switch.
 # Which effect to use it controlled by the lamp's contrast knob.
@@ -37,7 +40,7 @@ SCREEN_ENABLE_PIN_INPUT = board.D17;
 
 # Other constants.
 MAX_POTENTIOMETER_VOLTAGE = 3.286
-LIGHT_SENSOR_THRESHOLD = 10000 # If the light photo sensor falls below this amount, it indicates the AC lightbulb is off.
+LIGHT_SENSOR_THRESHOLD = 20000 # If the light photo sensor falls below this amount, it indicates the AC lightbulb is off.
 MAX_PWM_VALUE = 65535
 
 class Lamp():
@@ -95,7 +98,6 @@ class Lamp():
             subprocess.Popen('sudo pkill -9 fbi', shell=True)
         else:
             filename = os.path.dirname(os.path.realpath(__file__)) + "/" + filename
-            print(filename)
             subprocess.Popen('sudo pkill -9 fbi ; fbi --noverbose -T 2 ' + filename, shell=True)
 
     def evalScreenControl(self):
@@ -108,6 +110,7 @@ class Lamp():
 
     # Evaluate if the lamp bulp with the AC power source is on or off using a photo transistor.
     def evalLampState(self):
+        print(self.lightSensor.value)
         if( self.lightSensor.value < LIGHT_SENSOR_THRESHOLD ):
             self.bLampIsOn = False;
         else:
@@ -141,8 +144,12 @@ class Lamp():
 
     # Start playing a video instead of using the camera. Video source may be a live internet webcam or a local file.
     def startVideoStream(self, channel):
+        channelVal = videoStreamChannels[channel]
         self.showImage(VIDEO_STANDBY_IMAGE)
-        self.videoStream = subprocess.Popen(videoStreamChannels[channel], shell=True,stdin=subprocess.PIPE)
+        if (".mp4" in channelVal):
+            channelVal = "omxplayer --loop -no-keys " + os.path.dirname(os.path.realpath(__file__)) + "/" + channelVal
+
+        self.videoStream = subprocess.Popen(channelVal, shell=True)
 
     # Determine if we should be playing a video feed (instead of using the camera) and manage the stream.
     def evalVideoFeed(self):
